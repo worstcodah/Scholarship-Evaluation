@@ -1,0 +1,57 @@
+<div class="wrapper">
+
+
+  <div class="intern-list">
+    <div class="intern" *ngFor="let intern of interns">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Name: {{intern.name}}</mat-card-title>
+          <mat-card-subtitle>Age: {{intern.age}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          Date of birth: {{intern.birthDate | date: 'MM/dd/yyyy'}}
+        </mat-card-content>
+
+        <mat-card-footer>
+
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+
+
+  <div class="input-fields">
+    <form [formGroup]="formGroup" #form="ngForm">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="name" matInput placeholder="Enter your name...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input type="number" readonly="true" formControlName="age" matInput placeholder="Enter your age...">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input [max]="maxDate" (dateChange)="dateChanged()" formControlName="dateOfBirth" matInput
+          [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </div>
+
+
+  <div class="buttons">
+    <button (click)="getInterns()">Get interns</button>
+    <button (click)="createIntern()">Create intern</button>
+    <button (click)="updateIntern()">Update intern</button>
+    <button (click)="deleteIntern()">Delete intern</button>
+  </div>
+
+
+</div>
