@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   markedId: string = ''
   searchTypes: string[] = ['Ascending', 'Descending']
   searchType: string = ''
+  dateDisplayFormat: string = 'MM/dd/yyyy'
+  dateFormats: string[] = ['fullDate', 'longDate', 'shortDate']
+
   constructor(
     private apiService: ApiService,
     private toastr: ToastrService,
@@ -51,6 +54,14 @@ export class HomeComponent implements OnInit {
     this.name.setValue(intern.name)
     this.dateOfBirth.setValue(intern.birthDate)
     this.markedId = intern.id
+  }
+
+  changeDateDisplayFormat() {
+    let currentIndex = this.dateFormats.indexOf(this.dateDisplayFormat)
+    if (currentIndex === this.dateFormats.length - 1) {
+      currentIndex = -1
+    }
+    this.dateDisplayFormat = this.dateFormats[currentIndex + 1]
   }
 
   dateChanged() {

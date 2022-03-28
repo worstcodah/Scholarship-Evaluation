@@ -25,7 +25,7 @@
         </mat-card-header>
 
         <mat-card-content>
-          Date of birth: {{intern.birthDate | date: 'MM/dd/yyyy'}}
+          Date of birth: {{intern.birthDate | date: dateDisplayFormat }}
         </mat-card-content>
 
         <mat-card-footer>
@@ -33,6 +33,7 @@
             <mat-icon class="mat-18" matTooltip="Clicking on this icon will toggle on/off the update form"
               (click)="toggleEditForm(intern)">edit</mat-icon>
             <mat-icon class="mat-18" matTooltip="Delete this intern" (click)="deleteIntern(intern.id)">delete</mat-icon>
+            <mat-icon matTooltip="Change date display format" (click)="changeDateDisplayFormat()">date_range</mat-icon>
           </div>
         </mat-card-footer>
       </mat-card>
