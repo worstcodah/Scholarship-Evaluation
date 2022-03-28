@@ -4,7 +4,10 @@ import { Intern } from 'src/app/interfaces/intern'
 import { ApiService } from 'src/app/services/api.service'
 import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
+import { Subject, Subscription } from 'rxjs'
+import { UntilDestroy } from '@ngneat/until-destroy'
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-add-intern',
   templateUrl: './add-intern.component.html',
@@ -19,6 +22,9 @@ export class AddInternComponent implements OnInit {
   ) {}
   formGroup!: FormGroup
   maxDate = new Date()
+  apiServiceSub: Subscription
+  toastrSub: Subscription
+  unsubscribe$: Subject<void> = new Subject<void>()
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -36,6 +42,10 @@ export class AddInternComponent implements OnInit {
     this.maxDate.setDate(this.maxDate.getDate() - 6575)
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.complete()
+  }
+
   get age() {
     return this.formGroup.controls['age'] as FormControl
   }
@@ -48,14 +58,14 @@ export class AddInternComponent implements OnInit {
   }
 
   createIntern() {
-    this.apiService
+    this.apiServiceSub = this.apiService
       .createIntern({
         age: this.age.value,
         name: this.name.value,
         birthDate: this.dateOfBirth.value,
       })
       .subscribe(() => {
-        this.toastr
+        this.toastrSub = this.toastr
           .success('Intern added successfully!')
           .onHidden.subscribe(() => {
             this.router.navigateByUrl('home')

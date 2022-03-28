@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntilDestroy } from '@ngneat/until-destroy'
 import { ToastrService } from 'ngx-toastr'
+import { Subscription } from 'rxjs'
 import { Intern } from 'src/app/interfaces/intern'
 import { ApiService } from 'src/app/services/api.service'
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,6 +24,9 @@ export class HomeComponent implements OnInit {
   searchType: string = ''
   dateDisplayFormat: string = 'MM/dd/yyyy'
   dateFormats: string[] = ['fullDate', 'longDate', 'shortDate']
+  getSub: Subscription
+  updateSub: Subscription
+  deleteSub: Subscription
 
   constructor(
     private apiService: ApiService,
@@ -41,12 +47,14 @@ export class HomeComponent implements OnInit {
       age: ['', [Validators.required]],
       dateOfBirth: ['', Validators.required],
     })
-    this.getInterns().subscribe((next) => {
+    this.getSub = this.getInterns().subscribe((next) => {
       this.filteredInterns = this.interns = next
       console.log(this.interns)
     })
     this.maxDate.setDate(this.maxDate.getDate() - 6575)
   }
+
+  ngDestroy() {}
 
   toggleEditForm(intern: Intern) {
     this.showUpdateForm = !this.showUpdateForm
@@ -137,7 +145,7 @@ export class HomeComponent implements OnInit {
 
   updateIntern(id: string) {
     if (this.canUpdate()) {
-      this.apiService
+      this.updateSub = this.apiService
         .updateIntern(id, {
           id: id,
           age: this.age.value,
@@ -162,7 +170,7 @@ export class HomeComponent implements OnInit {
   }
 
   deleteIntern(id: string) {
-    this.apiService.deleteIntern(id).subscribe(
+    this.deleteSub = this.apiService.deleteIntern(id).subscribe(
       (interns: Intern[]) => {
         this.filteredInterns = this.interns = interns
         this.toastr.success('Delete successful !', 'Status')
