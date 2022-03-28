@@ -20,6 +20,7 @@ namespace EvaluationAPI.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetInterns()
         {
             var interns =  await _internCollectionService.GetAll();
@@ -27,29 +28,35 @@ namespace EvaluationAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(200)]
+
         public async Task<IActionResult> CreateIntern([FromBody] Intern intern)
         {
             await _internCollectionService.Create(intern);
             return Ok(await _internCollectionService.GetAll());
         }
         [HttpPut("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> UpdateIntern(Guid id, [FromBody] Intern intern)
         {
             if (await _internCollectionService.Update(id, intern))
             {
-                return Ok("Update successful!");
+                return Ok(await _internCollectionService.GetAll());
             }
-            return NotFound();
+            return NotFound($"Intern with id {id} not found");
 
         }
         [HttpDelete("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteIntern(Guid id)
         {
             if (await _internCollectionService.Delete(id))
             {
-                return Ok("Delete successful!");
+                return Ok(await _internCollectionService.GetAll());
             }
-            return NotFound();
+            return NotFound($"Intern with id {id} not found");
         }
     }
 }

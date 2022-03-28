@@ -1,0 +1,27 @@
+<div class="wrapper">
+
+  <div class="input-fields">
+    <form [formGroup]="formGroup" #form="ngForm" (ngSubmit)="createIntern()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="name" matInput placeholder="Enter your name...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input type="number" readonly="true" formControlName="age" matInput placeholder="Enter your age...">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input [max]="maxDate" (dateChange)="dateChanged()" formControlName="dateOfBirth" matInput
+          [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button>Add intern</button>
+    </form>
+  </div>
+</div>

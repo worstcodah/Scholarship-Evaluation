@@ -1,0 +1,33 @@
+.intern-list {
+  display              : grid;
+  grid-template-columns: auto auto auto;
+  row-gap              : 3vh;
+  column-gap           : 5vw;
+}
+
+.input-fields {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  gap            : 4vh;
+}
+
+.wrapper {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  flex-direction : column;
+  gap            : 5vh;
+}
+
+mat-card {
+  padding-top   : 5vh;
+  padding-bottom: 2vh;
+}
+
+.row-flex {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  gap            : 1vh;
+}
