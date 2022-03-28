@@ -3,16 +3,23 @@
   <div class="search">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
-      <input type="text" [(ngModel)]="searchWord" (input)="onFilterChange()" matInput placeholder="Filter by name...">
+      <input type="text" [(ngModel)]="searchWord" matInput placeholder="Filter by name...">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-select [(ngModel)]="searchType" placeholder="Type">
+      <mat-select [(ngModel)]="searchType" placeholder="Type" matTooltip="Order in which elements will be sorted">
         <mat-option *ngFor="let searchType of searchTypes" [value]="searchType">
           {{searchType}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <button mat-button class="btn" (click)="filter()">
+      <div class="row-flex">
+
+        Sort
+        <mat-icon class="mat-18">sort</mat-icon>
+      </div>
+    </button>
 
 
   </div>
@@ -40,7 +47,13 @@
     </div>
   </div>
 
-  <button mat-button routerLink="/add-intern">Add an intern</button>
+  <button mat-button routerLink="/add-intern" class="btn">
+    <div class="row-flex">
+
+      Add an intern
+      <mat-icon class="mat-18">add_circle</mat-icon>
+    </div>
+  </button>
 
   <div class="input-fields" *ngIf="showUpdateForm">
     <form [formGroup]="formGroup" #form="ngForm" (ngSubmit)="updateIntern(markedId)">
@@ -50,8 +63,10 @@
         <input type="text" formControlName="name" matInput placeholder="Enter your name...">
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Age</mat-label>
+      <mat-form-field appearance="outline" matTooltip="Age is computed based on the date of birth"
+        matTooltipPosition="right">
+        <mat-label>Age <mat-icon>info</mat-icon>
+        </mat-label>
         <input type="number" readonly="true" formControlName="age" matInput placeholder="Enter your age...">
 
       </mat-form-field>
@@ -64,7 +79,13 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <button mat-button mat-flat-button>Update</button>
+      <button mat-button class="btn">
+        <div class="row-flex">
+
+          Update
+          <mat-icon class="mat-18">update</mat-icon>
+        </div>
+      </button>
     </form>
   </div>
 </div>

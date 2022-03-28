@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
     return values.sort((one, two) => (one.name > two.name ? -1 : 1))
   }
 
-  onFilterChange() {
+  filter() {
     if (this.searchWord !== '' && this.searchType !== '') {
       this.filteredInterns = this.interns.filter((intern) =>
         intern.name.toLowerCase().includes(this.searchWord.toLowerCase()),
@@ -103,6 +103,11 @@ export class HomeComponent implements OnInit {
       } else {
         this.filteredInterns = this.sortDescending(this.filteredInterns)
       }
+    } else {
+      this.toastr.error(
+        'You have to enter a name & select a search type first !',
+        'Error',
+      )
     }
   }
 

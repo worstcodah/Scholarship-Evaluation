@@ -1,3 +1,5 @@
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatButtonModule } from '@angular/material/button'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
@@ -16,8 +18,10 @@ import { RouterModule } from '@angular/router'
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatTooltipModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 3500,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressBar: true,

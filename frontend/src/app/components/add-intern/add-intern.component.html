@@ -1,5 +1,6 @@
 <div class="wrapper">
 
+  <h1>Add an intern</h1>
   <div class="input-fields">
     <form [formGroup]="formGroup" #form="ngForm" (ngSubmit)="createIntern()">
 
@@ -21,7 +22,15 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button>Add intern</button>
+      <button mat-button class="btn">
+        <div class="row-flex">
+
+          Add intern <mat-icon class="mat-18">add</mat-icon>
+        </div>
+      </button>
+      <button mat-button class="btn" routerLink="/home">
+        <mat-icon class="mat-18">arrow_back</mat-icon> Home
+      </button>
     </form>
   </div>
 </div>

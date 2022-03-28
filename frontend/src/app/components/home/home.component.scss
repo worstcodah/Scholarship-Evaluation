@@ -1,15 +1,45 @@
 .intern-list {
   display              : grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   row-gap              : 3vh;
   column-gap           : 5vw;
 }
 
-.input-fields {
+.wrapper {
+  background: silver;
+  min-height: 100vh;
+  height    : auto;
+}
+
+.row-flex {
   display        : flex;
-  flex-direction : column;
   justify-content: center;
-  gap            : 4vh;
+  align-items    : center;
+  gap            : .6vw;
+}
+
+
+.search {
+  display        : flex;
+  flex-direction : row;
+  justify-content: center;
+  align-items    : center;
+  gap            : 3vw;
+
+
+}
+
+.input-fields {
+  form {
+
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    gap            : 4vh;
+  }
+
+  margin-bottom: 5vh;
 }
 
 .wrapper {
@@ -21,8 +51,9 @@
 }
 
 mat-card {
-  padding-top   : 5vh;
-  padding-bottom: 2vh;
+  padding-top   : 4vh;
+  padding-bottom: 2.5vh;
+  background    : rgb(28, 202, 214);
 }
 
 .row-flex {
@@ -30,4 +61,16 @@ mat-card {
   justify-content: center;
   align-items    : center;
   gap            : 1vh;
+}
+
+.btn {
+  color     : black;
+  background: white;
+  border    : 1px solid black;
+}
+
+.btn:hover {
+  background: black;
+  color     : white;
+
 }

@@ -1,4 +1,4 @@
-.input-fields {
+form {
   display        : flex;
   flex-direction : column;
   justify-content: center;
@@ -11,5 +11,25 @@
   justify-content: center;
   align-items    : center;
   flex-direction : column;
-  height         : 100vh;
+  min-height     : 100vh;
+  height         : auto;
+  background     : rgb(138, 174, 217)
+}
+
+.btn {
+  color     : black;
+  background: yellow;
+
+}
+
+.row-flex {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  gap            : .6vw;
+}
+
+.btn:hover {
+  color     : yellow;
+  background: black;
 }
